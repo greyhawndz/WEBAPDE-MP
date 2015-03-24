@@ -1,0 +1,255 @@
+#locationinput
+{
+	border:2px solid #456879;
+	border-radius:10px;
+	height: 45px;
+	width: 430px;
+	font-size: 20px;
+	color: gray;
+	outline:none;
+}
+
+.content
+{
+	width: 400px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.buttoninput
+{
+	border-radius:10px;
+	margin-left: 30%;
+	color: gray;
+	outline:none;
+}
+
+.headertitle
+{
+	text-align: center;
+	font-size: 80px;
+	color: black;
+}
+
+.slogan
+{
+	text-align: center;
+	font-size: 30px;
+	color: gray;
+}
+
+.uname
+{
+	border:2px solid #456879;
+	border-radius:10px;
+	height: 45px;
+	width: 430px;
+	color: gray;
+	font-size: 20px;
+	outline:none;
+}
+
+.loginbutt
+{
+	border-radius:10px;
+	margin-left: 5%;
+	font-size:20px;
+	color:gray;
+	outline:none;
+}
+
+.regbutt
+{
+	border-radius:10px;
+	margin-left: 20%;
+	font-size:20px;
+	color:gray;
+	outline:none;
+}
+
+.welcomeuser
+{
+    height: 100px;
+    width: 250px;
+    
+    position:relative;
+    left: 1080px;
+    bottom: 180px;
+   font-weight: bold;
+    
+}
+
+.otherwelcomeuser
+{
+    height: 100px;
+    width: 250px;
+    
+    position:relative;
+    left: 1000px;
+    bottom: 180px;
+   font-weight: bold;
+}
+
+.otherwelcomeuser ul
+{
+    margin: 0;
+    padding-right: 0;
+    font-size: 16px;
+    color: gray;
+    
+}
+
+.otherwelcomeuser ul li
+{
+    list-style: none;
+    float: left;
+    display: block;
+    padding: 10px 5px;
+}
+
+.welcomeuser ul
+{
+    margin: 0;
+    padding-right: 0;
+    font-size: 16px;
+    color: gray;
+    
+}
+
+.welcomeuser ul li
+{
+    list-style: none;
+    float: left;
+    display: block;
+    padding: 10px 5px;
+}
+
+.header
+{
+    height: 200px;
+    width: 100%;  
+    margin: auto;
+}
+
+.welcomeuser ul li a
+{
+    text-decoration: none;
+    
+}
+
+.googlemap
+{
+    width: 405px;
+    height: 300px;
+    position: relative;
+    margin: 0 auto;
+    
+}
+
+
+.topdiv div
+{
+    display: inline-block;
+}
+
+.topdiv
+{
+    padding: 0% auto;
+    padding-left: 33%;
+    padding-top: 10px;
+    width: auto;
+}
+
+.buttdiv
+{
+    padding: 0% auto;
+    padding-left:20%;
+    padding-top:20px;
+    width: auto;
+}
+
+.buttdiv div
+{
+   display: inline-block; 
+}
+
+
+.buttons
+{
+    height: 120px;
+}
+
+.megadiv
+{
+    width: auto;
+    position: relative;
+    top: 10px;
+    overflow: hidden;
+    height: 700px;
+    padding-top: 10px;
+}
+
+.butt
+{
+    font-size:20px;
+    color: gray;
+    border-radius: 10px;
+    outline: none;
+}
+
+.doing
+{
+    height: 100%;
+}
+
+.hungry
+{
+    height: 100%;
+}
+
+.thirsty
+{  
+    height: 100%;
+}
+
+
+.navbar-custom{
+    background-color: aqua;
+    
+}
+
+.break {
+        border-top-width: 1px;
+        border-top-color: rgb(204, 204, 204);
+        border-bottom-width: 1px;
+        border-bottom-color: rgb(255, 255, 255);
+        clear: both;
+        border-style: solid;
+}
+
+.rect{
+  background-color: aqua;
+  border-radius: 10px;
+  height: 100px;
+  width: auto;
+}
+
+.rect img 
+{
+    height: 99px;
+    width: auto;
+}
+
+.smallrect
+{
+    
+    height: 90%;
+    font-size: 28px;
+    font-weight: bold;
+    color:gray;
+    position:relative;
+    bottom: 95px;
+   overflow:auto;
+   width:400px;
+   left: 100px;
+}
