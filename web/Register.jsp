@@ -13,45 +13,6 @@
 	-->
     <script>
 
-        function clearRegFieldU()
-		{
-			if(document.getElementById('userReg').value == "Username")
-            {
-				document.getElementById('userReg').value = '';
-			}
-		}
-        
-        function clearRegFieldA()
-		{
-			if(document.getElementById('age').value == "Age")
-            {
-				document.getElementById('age').value = '';
-			}
-		}
-
-		function clearRegFieldP2()
-		{
-			if(document.getElementById('confP').value == "Password")
-            {
-				document.getElementById('confP').value = '';
-			}
-		}
-
-		function clearRegFieldE()
-		{
-			if(document.getElementById('em').value == "Email")
-                        {
-				document.getElementById('em').value = '';
-			}
-		}
-                
-                function clearRegFieldP()
-                {
-                    if(document.getElementById('pReg').value == "Password")
-                    {
-                        document.getElementById('pReg').value = '';
-                    }
-                }
         
 	</script>
     <style>
@@ -88,9 +49,9 @@
                 }
                 .sexy{
                     position:relative;
-                    bottom:3px;
-                    height: 25px;
-                    width: 60px;
+                    bottom:0px;
+                    height: 30px;
+                    width: 120px;
                     border:2px solid #456879;
                     border-radius:10px;
                     outline: none;
@@ -109,9 +70,9 @@
                 .monthdate
                 {
                     position:relative;
-                    bottom: 3px;
-                    height: 25px;
-                    width: 75px;
+                    bottom: 0px;
+                    height: 35px;
+                    width: 140px;
                     border:2px solid #456879;
                     border-radius:10px;
                     outline: none;
@@ -120,9 +81,9 @@
                 .daydate
                 {
                     position:relative;
-                    bottom: 3px;
-                    height: 25px;
-                    width: 45px;
+                    bottom: 0px;
+                    height: 35px;
+                    width: 60px;
                     border:2px solid #456879;
                     border-radius:10px;
                     outline: none;
@@ -131,9 +92,9 @@
                 .yeardate
                 {
                     position:relative;
-                    bottom: 3px;
-                    height: 25px;
-                    width: 60px;
+                    bottom: 0px;
+                    height: 35px;
+                    width: 100px;
                     border:2px solid #456879;
                     border-radius:10px;
                     outline: none;
@@ -162,13 +123,13 @@
 <div class="regContent">
     <form class="register" role="menu" aria-labelledby="dropdownMenu1" action="RegisterServlet" method="POST">
         <h1 class="headerReg"><a href="index.jsp">REGISTER</a></h1>
-        <input type ="text"  class="uReg" id="userReg" name="Username" value="Username" onclick="clearRegFieldU()"><br>
+        <input type ="text"  class="uReg" id="userReg" name="Username" placeholder="Username"><br>
         <h3>Password:</h3>
-        <input type="password"  class="uReg" id="pReg" name="Password" value="Password" onclick="clearRegFieldP()"><br>
+        <input type="password"  class="uReg" id="pReg" name="Password" placeholder="Password" ><br>
         <h3>Confirm Password:</h3>
-        <input type="password"  class="uReg" id="confP" name="ConfPass" value="Password" onclick="clearRegFieldP2()"><br><br>
-        <input type="text"  class="uReg" id="age" name="Age" value="Age" onclick="clearRegFieldA()"><br><br>
-	<input type="text"  class="uReg" id="em" name="Email" value="Email" onclick="clearRegFieldE()"><br><br>
+        <input type="password"  class="uReg" id="confP" name="ConfPass" placeholder="Password" ><br><br>
+        <input type="text"  class="uReg" id="age" name="Age" placeholder="Age" ><br><br>
+	<input type="text"  class="uReg" id="em" name="Email" placeholder="Email" ><br><br>
         <h3 class="drop"><font color="gray">Sex: 
         <select name="sex" class="sexy">
             <option>Male</option>

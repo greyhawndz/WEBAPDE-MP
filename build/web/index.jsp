@@ -93,29 +93,16 @@
 		}
 		</style>
                 
-                <%  
-                    String errorMsg = "";
-                    
-                    
-                        if(session.getAttribute("username") == null || session.getAttribute("password") == null){
-                            errorMsg = "Invalid Username/Password!";
-                        }
-                        else{
-                            errorMsg = "";
-                        }
-                        
-                    
-                    
-                %>
+                
 </head>
 <body>
 	<h1 class="headertitle">WHAT SHOULD I DO?</h1>
 	<h3 class="slogan">Smart.Innovative.Sexy</h3><br><br>
 	<div class="content">
              <form action="LoginServlet" method="POST">
-                 <h4><font color="red"><%= errorMsg%></h4>
-		<input type="text" id="unames" class="uname" name="uName" value="Username" onclick="clearField()"><br><br>
-		<input type="password" id="pword" class="uname" name="pWord" value="Password" onclick="clearField2()"><br><br>
+               
+		<input type="text" id="unames" class="uname" name="uName" placeholder="Username"><br><br>
+		<input type="password" id="pword" class="uname" name="pWord" placeholder="Password"><br><br>
 		
                 <button class="regbutt" type="button" onclick="javascript:window.location='Register.jsp';" >Register<span class="caret"></span> </button>
 		
@@ -126,3 +113,4 @@
 	</div>
 </body>
 </html>
+

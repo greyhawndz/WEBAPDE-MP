@@ -8,162 +8,197 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     
-    <script>
-        var suggestions = ["Sleeping in Class?", "Punching Someone?", "ACTUALLY STUDYING????", "Skipping School?"];
-        var suggestions2 = ["Eating in Agno?", "Eating in Tori Box?", "Eating in McDonalds?", "Eating in Jolibee?"];
-        var suggestions3 = ["DRINKING IN BARN?", "Drinking in Agno?", "Drinking in StarBucks?", "Drinking FREE WATER in the Water Fountain?"];
-        var i = 0;
+     
+     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    
+	
+	<script>
+var map;
+var iterator = 0;
+var total;
+var currMarker = [];
+var placeType = ["restaurant", "bar", "cafe"];
+var autocomplete;
+
+function disable()
+{
+    
+    document.getElementById("placeID").disabled = true;
+}
+
+            $(document).ready(function() {
+                            disable();
+                        });
+function enable(){
+    document.getElementById("placeID").disabled = false;
+ }
+function initialize() {
+  var pyrmont = new google.maps.LatLng(14.5661786, 120.99339080000004);
+
+  map = new google.maps.Map(document.getElementById('map-canvas'), {
+    center: pyrmont,
+    zoom: 15
+  });
+  
+ 
+
+  
+  
+}
+
+$(function () {
+                var input = document.getElementById('pac-input');
+                var options = {                    
+                    types: ["geocode","establishment"]
+                };
+                 
+                
+                autocomplete = new google.maps.places.Autocomplete(input, options);
+               
+                
+                
+            });
+function funky(){
+    if(document.getElementById("changetype-establishment").checked){
+                    placeType = ["restaurant"];
+                    
+                }
+                else if(document.getElementById("changetype-address").checked){
+                    placeType = ["aquarium", "amusement_park", "zoo", "casino", "clothing_store", "store", "shopping_mall", "spa", "gym"];
+                    
+                }
+}
+
+function search(){
+    enable();
+    var infowindow;
+    var place = autocomplete.getPlace();
+                var request = {
+                    location: place.geometry.location,
+                    radius: 500,
+                    types: placeType
+                };
+                map.setCenter(place.geometry.location);
+    infowindow = new google.maps.InfoWindow();
+                var service = new google.maps.places.PlacesService(map);
+                service.nearbySearch(request, callback);
+}
+function callback(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+      total = results.length;
+       
+      createMarker(results[iterator]);
+      iterator++;
+      if(iterator >= total){
+          iterator = 0;
+      }
+    
+  }
+}
+
+
+function createMarker(place) {
+  var placeLoc = place.geometry.location;
+  
+  var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location
+  });
+  map.setCenter(marker.getPosition());
+  currMarker.push(marker);
+  if(currMarker.length >=2){
+     
+      currMarker[0].setMap(null);
+      currMarker[0] = currMarker[1];
+      currMarker.pop();
+  }
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.setContent(place.name);
+    infowindow.open(map, this);
+  });
+  document.getElementById("sug").innerHTML = "<h2 id=\"sug\">"+place.name+"</h2>";
+  document.getElementById("placeNameID").value = place.name;
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+    </script>
+	
+<style>
+#map-canvas{
+         position: relative;
+         left: 200px;
+         
+          height:250px;
+          width: 880px;
+          margin: 0px;
+        padding: 0px
+      }
+      
+      .controls{
+          width: 300px;
+          position: relative;
+          top: 280px;
+          left: 500px;
+      }
+      .searchbutt{
+          position: relative;
+          bottom: -15px;
+          left:15px;
+      }
+      #sug{
+         text-align: center;
+         color: gray;
+         text-transform: uppercase;
+      }
+      .submitPlace{
+          position: relative;
+          bottom: 150px;
+          left: 116px;
+      }
+      
+      
+	  </style>
+	  
+	  </head>
+          
+          
+          <body>
+	  
+	  <div class="header">
+        <h1 class="headertitle">TRY VISITING:</h1><br>
+        <h2 id="sug">NOTHING</h2>
+        <div class="otherwelcomeuser">
+            <form class="outform" action="LogoutServlet" method="post">
+                <a href="account.jsp" class="btn btn-default" name="account">Profile</a>
+                <input type="submit" class="btn btn-default" value="Logout">
+            </form>
             
-        function stupidWrite()
-        {
-            document.getElementById('fake').innerHTML = suggestions[i];
-            i++;
-            if(i>3)
-            {
-                i =0;
-            }
-        }
+        </div>
+            <input id="pac-input" name="address" class="controls" type="text"
+        placeholder="Enter a location">
+    <div id="type-selector" class="controls">
+      
+      <input type="radio" name="type" id="changetype-establishment" checked="checked" onclick="funky()">
+      Food
+
+      <input type="radio" name="type" id="changetype-address" onclick="funky()">
+      Recreation
+
+      <input type="button" class="btn btn-default searchbutt" onclick="search()" value="Search!">
+      <form class="submitPlace" action="PlaceServlet" method="post">
+          <input type="hidden" id="placeNameID" name="placeName">
+          <input type="submit" id="placeID" class="btn btn-default" value="I visited this!">
+      </form>
+    </div>
+        </div>		
+
+    
         
-        function stupidWrite2()
-        {
-            document.getElementById('fake2').innerHTML = suggestions2[i];
-            i++;
-            if(i>3)
-            {
-                i =0;
-            }
-        }
-        
-        function stupidWrite3()
-        {
-            document.getElementById('fake3').innerHTML = suggestions3[i];
-            i++;
-            if(i>3)
-            {
-                i =0;
-            }
-        }
-        </script>
-</head
-<body>
-    <div class="container megadiv">
-    <div class="doing">
-    <a name="doing"></a>
-    <div class="header">
-        <h1 class="headertitle">HAVE YOU TRIED:</h1><br>
-        
-        <h3 class="slogan" id="fake">Skipping School?</h3>
-        <div class="welcomeuser">
-            <ul>
-                <li>Hello <a href="account.html">user1234</a></li>
-                <li><a href="login.html">Sign Out</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class = "googlemap">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.5987940231726!2d120.99394700000002!3d14.564921000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c97f2ea0318b%3A0x8e8eae0957d17c38!2sDe+La+Salle+University!5e0!3m2!1sen!2sph!4v1425394714735" width="400" height="300" frameborder="0" style="border:0"></iframe>
-    </div>
-    <div class="buttons">
-        <div class="topdiv">
-        <div>
-        <input type="button" class="btn btn-default butt" value="NO, THAT'S BORING" onclick="stupidWrite()">
-        </div>
-        <div>
-            <input type="button" class="btn btn-default butt" value="I'M GONNA DO THIS">
-        </div>
-        </div>
-        
-        <div class="buttdiv">
-            <div>
-                <a class="btn btn-default butt" href="mainpage.html">MY LOCATION IS WRONG</a>
-            </div>
-            <div>
-                <a class="btn btn-default butt" href="#hungry">I'M ACTUALLY HUNGRY</a>
-            </div>
-            <div>
-                <a class="btn btn-default butt" href="#thirsty">I'M ACTUALLY THIRSTY</a>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="hungry">
-        <a name="hungry"></a>
-        <div class="header">
-        <h1 class="headertitle">HAVE YOU TRIED:</h1><br>
-        
-        <h3 class="slogan" id="fake2">Eating in Jolibee?</h3>
-        <div class="welcomeuser">
-            <ul>
-                <li>Hello <a href="account.html">user1234</a></li>
-                <li><a href="login.html">Sign Out</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class = "googlemap">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.5987940231726!2d120.99394700000002!3d14.564921000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c97f2ea0318b%3A0x8e8eae0957d17c38!2sDe+La+Salle+University!5e0!3m2!1sen!2sph!4v1425394714735" width="400" height="300" frameborder="0" style="border:0"></iframe>
-    </div>
-    <div class="buttons">
-        <div class="topdiv">
-        <div>
-        <input type="button" class="btn btn-default butt" value="NO, I DON'T LIKE THAT" onclick="stupidWrite2()">
-        </div>
-        <div>
-            <input type="button" class="btn btn-default butt" value="THIS ONE SEEMS NICE">
-        </div>
-        </div>
-        
-        <div class="buttdiv">
-            <div>
-                <a class="btn btn-default butt" href="mainpage.html">MY LOCATION IS WRONG</a>
-            </div>
-            <div>
-                <a class="btn btn-default butt" href="#doing">I WANT TO DO SOMETHING</a>
-            </div>
-            <div>
-                <a class="btn btn-default butt" href="#thirsty">I'M ACTUALLY THIRSTY</a>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="thirsty">
-        <a name="thirsty"></a>
-        <div class="header">
-        <h1 class="headertitle">HAVE YOU TRIED:</h1><br>
-        
-        <h3 class="slogan" id="fake3">Drinking FREE WATER in the Water Fountain?</h3>
-        <div class="welcomeuser">
-            <ul>
-                <li>Hello <a href="account.html">user1234</a></li>
-                <li><a href="login.html">Sign Out</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class = "googlemap">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.5987940231726!2d120.99394700000002!3d14.564921000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c97f2ea0318b%3A0x8e8eae0957d17c38!2sDe+La+Salle+University!5e0!3m2!1sen!2sph!4v1425394714735" width="400" height="300" frameborder="0" style="border:0"></iframe>
-    </div>
-    <div class="buttons">
-        <div class="topdiv">
-        <div>
-        <input type="button" class="btn btn-default butt" value="NO, I DON'T LIKE THAT" onclick="stupidWrite3()">
-        </div>
-        <div>
-            <input type="button" class="btn btn-default butt" value="THIS ONE SEEMS NICE">
-        </div>
-        </div>
-        
-        <div class="buttdiv">
-            <div>
-                <a class="btn btn-default butt" href="mainpage.html">MY LOCATION IS WRONG</a>
-            </div>
-            <div>
-                <a class="btn btn-default butt" href="#doing">I WANT TO DO SOMETHING</a>
-            </div>
-            <div>
-                <a class="btn btn-default butt" href="#hungry">I'M ACTUALLY HUNGRY</a>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-</body>    
+    <div id="map-canvas"></div>
+	
+          </body>
 </html>

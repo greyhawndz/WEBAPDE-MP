@@ -85,7 +85,7 @@ public class RegisterHandler {
     public void register(RegisterForm reg)
     {
         try {
-            String query = "INSERT INTO account (name, password, birthday, sex, email, age) VALUES(?,?,?,?,?,?)";
+            String query = "INSERT INTO account (name, password, birthday, sex, email, age, image, about_me) VALUES(?,?,?,?,?,?,?,?)";
             statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, reg.getUsername());
             statement.setString(2, reg.getPassword());
@@ -93,6 +93,8 @@ public class RegisterHandler {
             statement.setString(4, reg.getSex());
             statement.setString(5, reg.getEmail());
             statement.setInt(6, reg.getAge());
+            statement.setString(7, "default.png");
+            statement.setString(8, "Nothing added yet");
             statement.executeUpdate();
             result = statement.getGeneratedKeys();
             result.next();

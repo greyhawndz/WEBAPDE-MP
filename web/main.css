@@ -1,4 +1,4 @@
-#locationinput
+.locationinput
 {
 	border:2px solid #456879;
 	border-radius:10px;
@@ -84,9 +84,10 @@
     height: 100px;
     width: 250px;
     
+    
     position:relative;
-    left: 1000px;
-    bottom: 180px;
+    left: 1200px;
+    bottom: 190px;
    font-weight: bold;
 }
 

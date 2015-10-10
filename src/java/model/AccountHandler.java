@@ -37,6 +37,68 @@ public class AccountHandler {
         return acc;
     }
     
+    public void edit( String username, String aboutme, String email, String sex, int age ){
+        
+        try {
+            String query = "UPDATE account SET about_me = ?, sex = ?, email = ?, age = ? WHERE name = ?";
+            
+            statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            
+            System.out.println(aboutme);
+            System.out.println(username);
+            
+            statement.setString(1, aboutme);
+            statement.setString(2, sex);
+            statement.setString(3, email);
+            statement.setInt(4, age);
+            statement.setString(5, username);
+            
+            statement.executeUpdate();
+            result = statement.getGeneratedKeys();
+            result.next();
+            
+            System.out.println("went insudee it bitch");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+    
+    public Boolean isValid( String email, String age ){
+        
+        if( !email.contains("@") && isInteger(age) == false )
+            return false;
+        return true;
+        
+    }
+    
+        private boolean isInteger(String str){
+        if (str == null) {
+		return false;
+	}
+	int length = str.length();
+	if (length == 0) {
+		return false;
+	}
+	int i = 0;
+	if (str.charAt(0) == '-') {
+		if (length == 1) {
+			return false;
+		}
+		i = 1;
+	}
+	for (; i < length; i++) {
+		char c = str.charAt(i);
+		if (c <= '/' || c >= ':') {
+			return false;
+		}
+	}
+	return true;
+        
+    }
+    
     public Account check(String username, String password){
         if(username.equals("Username") || password.equals("Password"))
             return null;

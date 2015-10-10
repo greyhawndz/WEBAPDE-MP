@@ -88,16 +88,27 @@ public class RegisterServlet extends HttpServlet {
         String year = request.getParameter("year");
         HttpSession session = request.getSession();
         RegisterForm reg = RegisterHandler.getInstance().check(username, password, confpass, ageString, email, sex, month, day, year);
+        
+        System.out.println("Username: " + username);
+        System.out.println("Password: " + password);
+        System.out.println("confpass: " + confpass);
+        System.out.println("age: " + ageString);
+        System.out.println("email: " + email);
+        System.out.println("sex: " + sex);
+        System.out.println("month: " + month);
+        System.out.println("day: " + day);
+        System.out.println("year: " + year);
+        
         if(reg != null){
             System.out.println("Not null");
             Cookie userCookie = new Cookie("username", reg.getUsername());
             Cookie ageCookie = new Cookie("age", Integer.toString(reg.getAge()));
             RegisterHandler.getInstance().register(reg);
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("registersuccess.jsp");
         }
         else{
             System.out.println("null");
-            response.sendRedirect("Register.jsp");
+            response.sendRedirect("registerfail.jsp");
         }
         
         

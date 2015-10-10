@@ -5,6 +5,8 @@
  */
 package controller;
 
+import model.Photo;
+import model.PhotoHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -83,9 +85,15 @@ public class LoginServlet extends HttpServlet {
         Account user = AccountHandler.getInstance().check(usercheck, passcheck);
         HttpSession session = request.getSession();
         if(user != null){
-            
+            Photo pic = PhotoHandler.getInstance().retrieve(user.getUsername());
             session.setAttribute("username", user.getUsername());
             session.setAttribute("password", user.getPassword());
+            session.setAttribute("aboutme", user.getAboutMe());
+            session.setAttribute("age", user.getAge());
+            session.setAttribute("sex", user.getSex());
+            session.setAttribute("email", user.getEmail());
+            session.setAttribute("image", pic);
+            
             Cookie userCookie = new Cookie("username", user.getUsername() );
             Cookie passwordCookie = new Cookie("password", user.getPassword());
             userCookie.setMaxAge(60*60);
@@ -95,9 +103,8 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("account.jsp");
         }
         else{
-            session.setAttribute("username", null);
-            session.setAttribute("password", null);
-            response.sendRedirect("index.jsp");
+            
+            response.sendRedirect("loginfail.jsp");
         }
     }
 
